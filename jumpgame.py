@@ -30,15 +30,15 @@ while showSplash:
 screen.blit(background, (0, 0))
 
 all_sprites = pygame.sprite.Group()
-all_sprites.add(AstroidSprite((100,100), spriteim))
+all_sprites.add(AstroidSprite((100, 100), spriteim))
 screen.blit(background, (0, 0))
 
 platform_group = pygame.sprite.Group()
-platform = PlatformSprite((SCREENW/2, SCREENH), platformim)
-platform2 = PlatformSprite((SCREENW/2+100, SCREENH/2+150), platformim)
+platform = PlatformSprite((SCREENW / 2, SCREENH), platformim)
+platform2 = PlatformSprite((SCREENW / 2 + 100, SCREENH / 2 + 200), platformim)
 platform_group.add(platform, platform2)
 
-player = PlayerSprite((SCREENW/2, SCREENH-platform.PH), netim)
+player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH), netim)
 player_group = pygame.sprite.Group()
 player_group.add(player)
 
@@ -85,11 +85,7 @@ while loop:
     for plat in platform_group:
         if pygame.sprite.collide_mask(plat, player):
             testcollision = True
-    if testcollision:
-        player.standing()
-    else:
-        player.falling()
-
+    player.colliding(testcollision)
 
     player.update()
     player_group.draw(screen)
