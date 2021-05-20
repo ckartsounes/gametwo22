@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gametwo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gametwo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jumpgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/jumpgame.py" afterDir="false" />
-    </list>
+    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added class files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,6 +49,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\melni\PycharmProjects\gametwo22" />
       <recent name="$PROJECT_DIR$/resources" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -95,8 +91,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1621475914285</updated>
-      <workItem from="1621478198138" duration="955000" />
+      <workItem from="1621478198138" duration="1342000" />
     </task>
+    <task id="LOCAL-00001" summary="added class files">
+      <created>1621479288989</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621479288989</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,25 +117,33 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added class files" />
+    <option name="LAST_COMMIT_MESSAGE" value="added class files" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1621479159919">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1621479264009">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479159919" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1621479159919">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479264009" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1621479264009">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479159919" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1621479159919">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479264009" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1621479264008">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479159919" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1621479159919">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479264008" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1621479264009">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479159919" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479264009" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1621479291892">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1621479291892" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/gametwo22$jumpgame.coverage" NAME="jumpgame Coverage Results" MODIFIED="1621479159912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/gametwo22$jumpgame.coverage" NAME="jumpgame Coverage Results" MODIFIED="1621479264002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
