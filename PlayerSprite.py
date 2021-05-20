@@ -40,6 +40,8 @@ class PlayerSprite(pygame.sprite.Sprite):
             if self.jumpnow > 0:
                 self.jumpnow -= 1
 
+    #this is a test
+
     def falling(self):
         self.fell = True
 
