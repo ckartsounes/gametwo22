@@ -50,7 +50,7 @@ platform13 = PlatformSprite((SCREENW / 2, SCREENH / 2 - 100), platformim)
 platform_group.add(platform, platform2, platform3, platform4, platform5, platform6, platform7, platform8, platform9,
                    platform10, platform11, platform12, platform13)
 
-player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH), netim)
+player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH), playerim)
 player_group = pygame.sprite.Group()
 player_group.add(player)
 

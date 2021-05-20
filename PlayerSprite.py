@@ -1,4 +1,7 @@
 import pygame
+from Resources import *
+
+
 class PlayerSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
@@ -47,6 +50,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         if self.collide:
             self.jumped = True
             self.jumpnow = 0
+            jumpsound.play()
 
     def shoot(self):
         pass

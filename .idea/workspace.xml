@@ -25,8 +25,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added platforms and background">
-      <change beforePath="$PROJECT_DIR$/resources/backgroundimg.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/backgroundimg.png" afterDir="false" />
+    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="fixed background">
+      <change afterPath="$PROJECT_DIR$/resources/gameover.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/hit.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/jump.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/shoot.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayerSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerSprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jumpgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/jumpgame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/boing.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621537466339</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed background">
+      <created>1621538045755</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621538045755</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +196,7 @@
     <MESSAGE value="added class files" />
     <MESSAGE value="added first bits of the program" />
     <MESSAGE value="added platforms and background" />
-    <option name="LAST_COMMIT_MESSAGE" value="added platforms and background" />
+    <MESSAGE value="fixed background" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed background" />
   </component>
 </project>
