@@ -10,9 +10,6 @@ from LavaSprite import *
 from Resources import *
 from GlobalVariables import *
 
-move_x, move_y = 0, 0
-x, y = SCREENW/2, SCREENH-50
-
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
 paddle_group = pygame.sprite.Group()
@@ -36,8 +33,12 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(AstroidSprite((100,100), spriteim))
 screen.blit(background, (0, 0))
 
-player = PlayerSprite((x, y), netim)
+platform_group = pygame.sprite.Group()
+platform = PlatformSprite((SCREENW/2, SCREENH), platformim)
+platform2 = PlatformSprite((SCREENW/2+100, SCREENH/2+150), platformim)
+platform_group.add(platform, platform2)
 
+player = PlayerSprite((SCREENW/2, SCREENH-platform.PH), netim)
 player_group = pygame.sprite.Group()
 player_group.add(player)
 
@@ -69,22 +70,31 @@ while loop:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        x -= 2
+        player.moveLeft()
     if keys[pygame.K_RIGHT]:
-        x += 2
+        player.moveRight()
     if keys[pygame.K_UP]:
-        y -= 2
-    if keys[pygame.K_DOWN]:
-        y += 2
-    player.update(x, y)
-    player_group.draw(screen)
+        player.jump()
 
     time_passed = clock.tick(120)
     time_passed_seconds = time_passed / 1000.0
 
+    screen.blit(font.render(str(SCORE), False, (0, 0, 0)), (0, 0))
+
+    testcollision = False
+    for plat in platform_group:
+        if pygame.sprite.collide_mask(plat, player):
+            testcollision = True
+    if testcollision:
+        player.standing()
+    else:
+        player.falling()
+
+
+    player.update()
+    player_group.draw(screen)
+    platform_group.update()
+    platform_group.draw(screen)
     all_sprites.update()
     all_sprites.draw(screen)
-    screen.blit(font.render(str(SCORE), False, (0, 0, 0)), (0, 0))
     pygame.display.update()
-
-    #pygame.sprite.collide_mask(jellyfish, player)

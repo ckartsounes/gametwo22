@@ -11,6 +11,8 @@ class PlatformSprite(pygame.sprite.Sprite):
         self.image = im
         self.rect = self.image.get_rect()
         self.rect.center = loc
+        self.rect.centery -= self.PH/2
+        self.rect.centerx -= self.PW / 2
         self.mask = pygame.mask.from_surface(self.image)
 
         self.damage = 1

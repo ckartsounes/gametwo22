@@ -2,13 +2,14 @@ import pygame
 from GlobalVariables import *
 
 resourcesS = 'resources//'
-netim = pygame.image.load(resourcesS + "net.png")
+netim = pygame.image.load(resourcesS + "playerimg.png")
 brickim = pygame.image.load(resourcesS + "spongehead.png")
-background_image_filename = resourcesS + 'spongebobback.png'
-sprite_image_filename = resourcesS + 'jellyfishy.png'
+platformim = pygame.image.load(resourcesS + "platformimg.png")
+background_image_filename = resourcesS + 'backgroundimg.png'
+sprite_image_filename = resourcesS + 'playerimg.png'
 pygame.init()
 pygame.mixer.init()
-screen = pygame.display.set_mode((640, 480), 0, 32)
+screen = pygame.display.set_mode((SCREENW, SCREENH), 0, 32)
 pygame.mixer.music.load(resourcesS + "bubbles.mp3")
 pygame.mixer.music.set_volume(0.25)
 pygame.mixer.music.play()
