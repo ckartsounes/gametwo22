@@ -17,7 +17,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.x = loc[0]
         self.y = loc[1]
         self.jumped = False
-        self.jumphight = 150
+        self.jumpheight = 150
         self.jumpnow = 0
         self.fell = False
         self.collide = False
@@ -37,7 +37,7 @@ class PlayerSprite(pygame.sprite.Sprite):
             print("test2")
             self.rect.centery -= 1
             self.jumpnow += 1
-        if self.jumphight == self.jumpnow:
+        if self.jumpheight == self.jumpnow:
             self.jumped = False
 
     def colliding(self, val):
