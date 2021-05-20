@@ -54,6 +54,8 @@ brickim = pygame.image.load(resourcesS + "spongehead.png")
 background_image_filename = resourcesS + 'spongebobback.png'
 sprite_image_filename = resourcesS + 'jellyfishy.png'
 
+t = True
+
 pygame.init()
 
 pygame.mixer.init()
