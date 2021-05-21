@@ -3,8 +3,12 @@ from GlobalVariables import *
 
 resourcesS = 'resources//'
 playerim = pygame.image.load(resourcesS + "playerimg.png")
-enemyim = pygame.image.load(resourcesS + "astroidimg.png")
+enemyim = pygame.image.load(resourcesS + "asteroidimg.png")
 platformim = pygame.image.load(resourcesS + "platformimg.png")
+jumpim = pygame.image.load(resourcesS + "jumpimg.png")
+leftim = pygame.image.load(resourcesS + "leftimg.png")
+rightim = pygame.image.load(resourcesS + "rightimg.png")
+# holeim = pygame.image.load(resourcesS + "")
 background_image_filename = resourcesS + 'backgroundimg.png'
 sprite_image_filename = resourcesS + 'playerimg.png'
 pygame.init()
@@ -19,8 +23,10 @@ jumpsound = pygame.mixer.Sound(resourcesS + "jump.wav")
 # hitsound = pygame.mixer.Sound(resourcesS + "hit.wav")
 # diesound = pygame.mixer.Sound(resourcesS + "gameover.wav")
 msg = "Lecture Survivor! Click to Play!"
-my_font = pygame.font.SysFont("arial", 32)
+msg2 = "YOU DIED!"
+my_font = pygame.font.SysFont("arial bold", 32)
 splash = my_font.render(msg, True, (0, 0, 0), (255, 0, 0))
+splash2 = my_font.render(msg2, True, (250, 0, 0), (0, 0, 0))
 splashrect = splash.get_rect()
 splashrect.center = (SCREENW / 2, SCREENH / 2)
 background = pygame.image.load(background_image_filename).convert()

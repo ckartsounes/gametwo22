@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 from random import randint
-from pygame import Vector2
 from sys import exit
 from PlayerSprite import *
 from AstroidSprite import *
@@ -49,6 +48,14 @@ player_group.add(player)
 
 Fullscreen = False
 loop = True
+
+
+# def show_go_screen(self):
+#    if not self.running:
+#       screen.blit(splash2, splashrect.topleft)
+#       pygame.display.update()
+# apparently doing a splash at the end is harder than I thought fml
+
 
 while loop:
     screen.blit(background, (0, 0))
