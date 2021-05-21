@@ -1,5 +1,6 @@
 import pygame
 
+
 class PlatformSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
@@ -17,6 +18,6 @@ class PlatformSprite(pygame.sprite.Sprite):
 
         self.damage = 1
 
-    def update(self):
-        #goes down
-        pass
+    def update(self, val):
+        if val:
+            self.rect.centery += 1

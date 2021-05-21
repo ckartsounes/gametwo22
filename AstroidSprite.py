@@ -13,8 +13,7 @@ class AstroidSprite(pygame.sprite.Sprite):
         self.rect.center = loc
         self.mask = pygame.mask.from_surface(self.image)
 
-        self.damage = 1
-
     def update(self):
-        #goes down
-        pass
+        self.rect.centery += 2
+
+

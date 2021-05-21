@@ -3,6 +3,7 @@ from GlobalVariables import *
 
 resourcesS = 'resources//'
 playerim = pygame.image.load(resourcesS + "playerimg.png")
+enemyim = pygame.image.load(resourcesS + "astroidimg.png")
 platformim = pygame.image.load(resourcesS + "platformimg.png")
 background_image_filename = resourcesS + 'backgroundimg.png'
 sprite_image_filename = resourcesS + 'playerimg.png'

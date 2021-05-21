@@ -6,7 +6,6 @@ from sys import exit
 from PlayerSprite import *
 from AstroidSprite import *
 from PlatformSprite import *
-from LavaSprite import *
 from Resources import *
 from GlobalVariables import *
 
@@ -29,26 +28,20 @@ while showSplash:
 
 screen.blit(background, (0, 0))
 
-all_sprites = pygame.sprite.Group()
-all_sprites.add(AstroidSprite((100, 100), spriteim))
+enemy_sprites = pygame.sprite.Group()
 screen.blit(background, (0, 0))
 
 platform_group = pygame.sprite.Group()
+test = randint(0, SCREENW)
+
 platform = PlatformSprite((SCREENW / 2, SCREENH), platformim)
-platform2 = PlatformSprite((SCREENW / 2 + 100, SCREENH / 2 + 200), platformim)
-platform3 = PlatformSprite((SCREENW / 2 - 100, SCREENH / 2 + 200), platformim)
-platform4 = PlatformSprite((SCREENW / 2, SCREENH / 2 + 100), platformim)
-platform5 = PlatformSprite((SCREENW / 2 + 100, SCREENH / 2 + 10), platformim)
-platform6 = PlatformSprite((SCREENW / 2 - 100, SCREENH / 2 + 10), platformim)
-platform7 = PlatformSprite((SCREENW / 2 - 200, SCREENH / 2 + 100), platformim)
-platform8 = PlatformSprite((SCREENW / 2 - 200, SCREENH), platformim)
-platform9 = PlatformSprite((SCREENW / 2 + 200, SCREENH), platformim)
-platform10 = PlatformSprite((SCREENW / 2 + 200, SCREENH / 2 + 100), platformim)
-platform11 = PlatformSprite((SCREENW / 2 + 200, SCREENH / 2 - 100), platformim)
-platform12 = PlatformSprite((SCREENW / 2 - 200, SCREENH / 2 - 100), platformim)
-platform13 = PlatformSprite((SCREENW / 2, SCREENH / 2 - 100), platformim)
-platform_group.add(platform, platform2, platform3, platform4, platform5, platform6, platform7, platform8, platform9,
-                   platform10, platform11, platform12, platform13)
+platform_group.add(platform)
+
+layer = SCREENH-75
+for x in range(0, 9):
+    platform = PlatformSprite((randint(0, SCREENW), randint(layer, layer+75)), platformim)
+    platform_group.add(platform)
+    layer -= 75
 
 player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH), playerim)
 player_group = pygame.sprite.Group()
@@ -59,8 +52,13 @@ loop = True
 
 while loop:
     screen.blit(background, (0, 0))
+    if player.life <= 0:
+        pygame.mixer.quit()
+        loop = False
+        pygame.quit()
+        exit()
     for event in pygame.event.get():
-        if event.type == QUIT or len(all_sprites) == 0:
+        if event.type == QUIT:
             pygame.mixer.quit()
             loop = False
             pygame.quit()
@@ -91,18 +89,37 @@ while loop:
     time_passed = clock.tick(120)
     time_passed_seconds = time_passed / 1000.0
 
-    screen.blit(font.render(str(SCORE), False, (0, 0, 0)), (0, 0))
+    global SCORE
+    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (0, 0))
+    screen.blit(font.render(("Lives: " + str(player.life)), False, (0, 0, 0)), (SCREENW-125, 0))
+
+    if player.addpoint:
+        SCORE += 1
+    if SCORE % 5 == 0 and SCORE != 0 and spawnAstroid:
+        enemy_sprites.add(AstroidSprite((randint(0, SCREENW), -enemyim.get_height()-75), enemyim))
+        spawnAstroid = False
+    elif SCORE % 6 == 0:
+        spawnAstroid = True
 
     testcollision = False
     for plat in platform_group:
+        if plat.rect.centery == SCREENH:
+            platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
+            platform_group.remove(plat)
         if pygame.sprite.collide_mask(plat, player):
             testcollision = True
+
     player.colliding(testcollision)
+
+    for enemy in enemy_sprites:
+        if pygame.sprite.collide_mask(enemy, player):
+            enemy_sprites.remove(enemy)
+            player.life -= 1
 
     player.update()
     player_group.draw(screen)
-    platform_group.update()
+    platform_group.update(player.jumped)
     platform_group.draw(screen)
-    all_sprites.update()
-    all_sprites.draw(screen)
+    enemy_sprites.update()
+    enemy_sprites.draw(screen)
     pygame.display.update()
