@@ -7,7 +7,6 @@ from AstroidSprite import *
 from PlatformSprite import *
 from Resources import *
 from GlobalVariables import *
-from CollisionTest import *
 
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
@@ -87,17 +86,17 @@ while loop:
                 pass
 
     testcollision = False
-    where = "None"
+    bottom = False
     for plat in platform_group:
         if plat.rect.centery == SCREENH:
             platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
             platform_group.remove(plat)
         if pygame.sprite.collide_mask(plat, player):
             testcollision = True
-            where = TestCollision(player, plat)
+            bottom = player.rect.bottom + 5 >= plat.rect.top and player.rect.bottom <= plat.rect.top + 5
             break
 
-    player.colliding(testcollision, where)
+    player.colliding(testcollision, bottom)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
@@ -105,9 +104,8 @@ while loop:
     if keys[pygame.K_RIGHT]:
         player.moveRight()
     if keys[pygame.K_UP]:
-        if where == 'bottom':
+        if bottom:
             player.jump()
-
     time_passed = clock.tick(120)
     time_passed_seconds = time_passed / 1000.0
 
