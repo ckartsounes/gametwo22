@@ -7,6 +7,7 @@ from AstroidSprite import *
 from PlatformSprite import *
 from Resources import *
 from GlobalVariables import *
+from CollisionTest import *
 
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
@@ -85,13 +86,27 @@ while loop:
             elif event.type == MOUSEBUTTONDOWN:
                 pass
 
+    testcollision = False
+    where = "None"
+    for plat in platform_group:
+        if plat.rect.centery == SCREENH:
+            platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
+            platform_group.remove(plat)
+        if pygame.sprite.collide_mask(plat, player):
+            testcollision = True
+            where = TestCollision(player, plat)
+            break
+
+    player.colliding(testcollision, where)
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         player.moveLeft()
     if keys[pygame.K_RIGHT]:
         player.moveRight()
     if keys[pygame.K_UP]:
-        player.jump()
+        if where == 'bottom':
+            player.jump()
 
     time_passed = clock.tick(120)
     time_passed_seconds = time_passed / 1000.0
@@ -107,16 +122,6 @@ while loop:
         spawnAstroid = False
     elif SCORE % 6 == 0:
         spawnAstroid = True
-
-    testcollision = False
-    for plat in platform_group:
-        if plat.rect.centery == SCREENH:
-            platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
-            platform_group.remove(plat)
-        if pygame.sprite.collide_mask(plat, player):
-            testcollision = True
-
-    player.colliding(testcollision)
 
     for enemy in enemy_sprites:
         if pygame.sprite.collide_mask(enemy, player):

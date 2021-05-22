@@ -24,6 +24,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.collide = False
         self.addpoint = False
         self.life = 5
+        self.collideWhere = 'None'
 
     def moveRight(self):
         if self.rect.centerx == SCREENW:
@@ -43,17 +44,19 @@ class PlayerSprite(pygame.sprite.Sprite):
             self.jumpnow += 1
         if self.jumpheight == self.jumpnow:
             self.jumped = False
+            self.jumpnow = 0
         if self.rect.centery == SCREENH:
             self.life = 0
+        if self.jumpnow == 1:
+            self.addpoint = False
 
-    def colliding(self, val):
+    def colliding(self, val, where):
         self.collide = val
-        self.addpoint = (self.collide and self.jumped == True and self.jumpnow == 0)
-
+        self.collideWhere = where
     def jump(self):
-        if self.collide:
+        if self.collide and self.collideWhere == 'bottom' and self.jumpnow == 0:
+            self.addpoint = True
             self.jumped = True
-            self.jumpnow = 0
             jumpsound.play()
 
     def shoot(self):
