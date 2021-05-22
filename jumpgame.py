@@ -25,6 +25,13 @@ while showSplash:
             showSplash = False
     pygame.display.update()
 
+
+def show_go_screen(self):
+    self.screen.fill(255, 0, 0)
+    self.draw_text("GAME OVER!", (255, 255, 255), SCREENW / 2, SCREENH / 2)
+    self.draw_text("Score: " + str(SCORE), (255, 255, 255), SCREENW / 2, SCREENH / 4)
+
+
 screen.blit(background, (0, 0))
 
 enemy_sprites = pygame.sprite.Group()
