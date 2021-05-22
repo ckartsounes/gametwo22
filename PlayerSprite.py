@@ -37,7 +37,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.rect.centerx -= 1
 
     def update(self):
-        if self.collide == False and self.jumped == False:
+        if self.jumped == False and self.collideWhere != 'bottom':
             self.rect.centery += 1
         if self.jumped == True:
             self.rect.centery -= 1
