@@ -1,10 +1,13 @@
 import pygame
 from Resources import *
 from GlobalVariables import *
+
+
 class PlayerSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
     jumped = False
+
     def __init__(self, loc):
         super().__init__()
         self.PW = playerim.get_width()
@@ -57,6 +60,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.bottom = bot
         if self.collide and self.bottom:
             self.image = playerim
+
     def jump(self):
         if self.collide and self.bottom and self.jumpnow == 0:
             self.addpoint = True
@@ -64,10 +68,12 @@ class PlayerSprite(pygame.sprite.Sprite):
             jumpsound.play()
             self.image = jumpim
 
+
 class BulletSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
     jumped = False
+
     def __init__(self, loc):
         super().__init__()
         self.PW = bulletim.get_width()

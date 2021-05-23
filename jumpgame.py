@@ -27,24 +27,21 @@ while showSplash:
 
 
 def show_gm_screen():
-    screen.blit(background, (0, 0))
-    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (0, 0))
+    screen.blit(background2, (0, 0))
+    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
+    screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 100, SCREENH / 2 - 80))
+    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 145, SCREENH / 2 + 80))
+
 
 screen.blit(background, (0, 0))
 
 Fullscreen = False
 loop = True
 
-# def show_go_screen(self):
-#    if not self.running:
-#       screen.blit(splash2, splashrect.topleft)
-#       pygame.display.update()
-# apparently doing a splash at the end is harder than I thought fml
-
 gameloop = True
 gameover = False
 while loop:
-    #initialization:
+    # initialization:
     enemy_sprites = pygame.sprite.Group()
     screen.blit(background, (0, 0))
 
@@ -81,7 +78,7 @@ while loop:
                 loop = False
                 pygame.quit()
                 exit()
-            if event.type == KEYDOWN:
+            elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.mixer.quit()
                     pygame.quit()
@@ -95,10 +92,10 @@ while loop:
                         screen = pygame.display.set_mode((640, 500), 0, 32)
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                print("c")
                 bullet = BulletSprite(player.rect.center)
                 bullet.pointer(pos)
                 bullet_group.add(bullet)
+                shootsound.play()
 
         testcollision = False
         bottom = False
@@ -137,10 +134,12 @@ while loop:
 
         for enemy in enemy_sprites:
             if pygame.sprite.collide_mask(enemy, player):
+                hitsound.play()
                 enemy_sprites.remove(enemy)
                 player.life -= 1
             for bullets in bullet_group:
                 if pygame.sprite.collide_mask(bullets, enemy):
+                    killsound.play()
                     enemy_sprites.remove(enemy)
                 if bullets.rect.centery < 0:
                     bullet_group.remove(bullets)
@@ -156,8 +155,12 @@ while loop:
         bullet_group.update()
         bullet_group.draw(screen)
         pygame.display.update()
+        playsound = True
 
     while gameover:
+        if playsound:
+            diesound.play()
+            playsound = False
         show_gm_screen()
         for event in pygame.event.get():
             if event.type == QUIT:
