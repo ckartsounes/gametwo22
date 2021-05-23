@@ -26,36 +26,14 @@ while showSplash:
     pygame.display.update()
 
 
-def show_go_screen(self):
-    self.screen.fill(255, 0, 0)
-    self.draw_text("GAME OVER!", (255, 255, 255), SCREENW / 2, SCREENH / 2)
-    self.draw_text("Score: " + str(SCORE), (255, 255, 255), SCREENW / 2, SCREENH / 4)
-
+def show_gm_screen():
+    screen.blit(background, (0, 0))
+    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (0, 0))
 
 screen.blit(background, (0, 0))
-
-enemy_sprites = pygame.sprite.Group()
-screen.blit(background, (0, 0))
-
-platform_group = pygame.sprite.Group()
-test = randint(0, SCREENW)
-
-platform = PlatformSprite((SCREENW / 2, SCREENH), platformim)
-platform_group.add(platform)
-
-layer = SCREENH-75
-for x in range(0, 9):
-    platform = PlatformSprite((randint(0, SCREENW), randint(layer, layer+75)), platformim)
-    platform_group.add(platform)
-    layer -= 75
-
-player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH), playerim)
-player_group = pygame.sprite.Group()
-player_group.add(player)
 
 Fullscreen = False
 loop = True
-
 
 # def show_go_screen(self):
 #    if not self.running:
@@ -63,80 +41,129 @@ loop = True
 #       pygame.display.update()
 # apparently doing a splash at the end is harder than I thought fml
 
-
+gameloop = True
+gameover = False
 while loop:
+    #initialization:
+    enemy_sprites = pygame.sprite.Group()
     screen.blit(background, (0, 0))
-    if player.life <= 0:
-        pygame.mixer.quit()
-        loop = False
-        pygame.quit()
-        exit()
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.mixer.quit()
-            loop = False
-            pygame.quit()
-            exit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                pygame.mixer.quit()
-                pygame.quit()
-            if Fullscreen:
-                screen = pygame.display.set_mode((640, 400), 0, 32)
-            if event.key == K_f and (event.mod & pygame.KMOD_SHIFT):
-                Fullscreen = not Fullscreen
-                if Fullscreen:
-                    screen = pygame.display.set_mode((640, 500), FULLSCREEN, 32)
-                else:
-                    screen = pygame.display.set_mode((640, 500), 0, 32)
-            elif event.type == MOUSEBUTTONDOWN:
-                pass
 
-    testcollision = False
-    bottom = False
-    for plat in platform_group:
-        if plat.rect.centery == SCREENH:
-            platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
-            platform_group.remove(plat)
-        if pygame.sprite.collide_mask(plat, player):
-            testcollision = True
-            bottom = player.rect.bottom + 5 >= plat.rect.top and player.rect.bottom <= plat.rect.top + 5
-            break
+    platform_group = pygame.sprite.Group()
+    test = randint(0, SCREENW)
 
-    player.colliding(testcollision, bottom)
+    platform = PlatformSprite((SCREENW / 2, SCREENH), platformim)
+    platform_group.add(platform)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        player.moveLeft()
-    if keys[pygame.K_RIGHT]:
-        player.moveRight()
-    if keys[pygame.K_UP]:
-        if bottom:
-            player.jump()
-    time_passed = clock.tick(120)
-    time_passed_seconds = time_passed / 1000.0
+    layer = SCREENH - 75
+    for x in range(0, 9):
+        platform = PlatformSprite((randint(0, SCREENW), randint(layer, layer + 75)), platformim)
+        platform_group.add(platform)
+        layer -= 75
+
+    player = PlayerSprite((SCREENW / 2, SCREENH - platform.PH))
+    player_group = pygame.sprite.Group()
+    player_group.add(player)
+    spawnAstroid = True
+
+    bullet_group = pygame.sprite.Group()
 
     global SCORE
-    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (0, 0))
-    screen.blit(font.render(("Lives: " + str(player.life)), False, (0, 0, 0)), (SCREENW-125, 0))
+    SCORE = 0
 
-    if player.addpoint:
-        SCORE += 1
-    if SCORE % 5 == 0 and SCORE != 0 and spawnAstroid:
-        enemy_sprites.add(AstroidSprite((randint(0, SCREENW), -enemyim.get_height()-75), enemyim))
-        spawnAstroid = False
-    elif SCORE % 6 == 0:
-        spawnAstroid = True
+    while gameloop:
+        screen.blit(background, (0, 0))
+        if player.life <= 0:
+            gameloop = False
+            gameover = True
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.mixer.quit()
+                loop = False
+                pygame.quit()
+                exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.mixer.quit()
+                    pygame.quit()
+                if Fullscreen:
+                    screen = pygame.display.set_mode((640, 400), 0, 32)
+                if event.key == K_f and (event.mod & pygame.KMOD_SHIFT):
+                    Fullscreen = not Fullscreen
+                    if Fullscreen:
+                        screen = pygame.display.set_mode((640, 500), FULLSCREEN, 32)
+                    else:
+                        screen = pygame.display.set_mode((640, 500), 0, 32)
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                print("c")
+                bullet = BulletSprite(player.rect.center)
+                bullet.pointer(pos)
+                bullet_group.add(bullet)
 
-    for enemy in enemy_sprites:
-        if pygame.sprite.collide_mask(enemy, player):
-            enemy_sprites.remove(enemy)
-            player.life -= 1
+        testcollision = False
+        bottom = False
+        for plat in platform_group:
+            if plat.rect.centery == SCREENH:
+                platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
+                platform_group.remove(plat)
+            if pygame.sprite.collide_mask(plat, player):
+                testcollision = True
+                bottom = player.rect.bottom + 5 >= plat.rect.top and player.rect.bottom <= plat.rect.top + 5
+                break
 
-    player.update()
-    player_group.draw(screen)
-    platform_group.update(player.jumped)
-    platform_group.draw(screen)
-    enemy_sprites.update()
-    enemy_sprites.draw(screen)
-    pygame.display.update()
+        player.colliding(testcollision, bottom)
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.moveLeft()
+        if keys[pygame.K_RIGHT]:
+            player.moveRight()
+        if keys[pygame.K_UP]:
+            if bottom:
+                player.jump()
+                if player.addpoint:
+                    SCORE += 1
+                if SCORE % 5 == 0 and spawnAstroid:
+                    enemy_sprites.add(AstroidSprite((randint(0, SCREENW), -enemyim.get_height() - 75), enemyim))
+                    spawnAstroid = False
+                elif SCORE % 6 == 0:
+                    spawnAstroid = True
+
+        time_passed = clock.tick(120)
+        time_passed_seconds = time_passed / 1000.0
+
+        screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (0, 0))
+        screen.blit(font.render(("Lives: " + str(player.life)), False, (0, 0, 0)), (SCREENW - 125, 0))
+
+        for enemy in enemy_sprites:
+            if pygame.sprite.collide_mask(enemy, player):
+                enemy_sprites.remove(enemy)
+                player.life -= 1
+            for bullets in bullet_group:
+                if pygame.sprite.collide_mask(bullets, enemy):
+                    enemy_sprites.remove(enemy)
+                if bullets.rect.centery < 0:
+                    bullet_group.remove(bullets)
+                if bullets.rect.centery > SCREENH:
+                    bullet_group.remove(bullets)
+
+        player.update()
+        player_group.draw(screen)
+        platform_group.update(player.jumped)
+        platform_group.draw(screen)
+        enemy_sprites.update()
+        enemy_sprites.draw(screen)
+        bullet_group.update()
+        bullet_group.draw(screen)
+        pygame.display.update()
+
+    while gameover:
+        show_gm_screen()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                exit()
+            elif event.type == MOUSEBUTTONDOWN:
+                gameover = False
+                gameloop = True
+        pygame.display.update()

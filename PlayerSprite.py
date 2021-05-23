@@ -5,11 +5,11 @@ class PlayerSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
     jumped = False
-    def __init__(self, loc, im):
+    def __init__(self, loc):
         super().__init__()
-        self.PW = im.get_width()
-        self.PH = im.get_height()
-        self.image = im
+        self.PW = playerim.get_width()
+        self.PH = playerim.get_height()
+        self.image = playerim
         self.rect = self.image.get_rect()
         self.rect.center = loc
         self.rect.centery -= self.PH/2
@@ -30,11 +30,13 @@ class PlayerSprite(pygame.sprite.Sprite):
         if self.rect.centerx == SCREENW:
             self.rect.centerx = 0
         self.rect.centerx += 1
+        self.image = rightim
 
     def moveLeft(self):
         if self.rect.centerx == 0:
             self.rect.centerx = SCREENW
         self.rect.centerx -= 1
+        self.image = leftim
 
     def update(self):
         if self.jumped == False and not self.bottom:
@@ -53,11 +55,33 @@ class PlayerSprite(pygame.sprite.Sprite):
     def colliding(self, val, bot):
         self.collide = val
         self.bottom = bot
+        if self.collide and self.bottom:
+            self.image = playerim
     def jump(self):
         if self.collide and self.bottom and self.jumpnow == 0:
             self.addpoint = True
             self.jumped = True
             jumpsound.play()
+            self.image = jumpim
 
-    def shoot(self):
-        pass
+class BulletSprite(pygame.sprite.Sprite):
+    PW = None
+    PH = None
+    jumped = False
+    def __init__(self, loc):
+        super().__init__()
+        self.PW = bulletim.get_width()
+        self.PH = bulletim.get_height()
+        self.image = bulletim
+        self.rect = self.image.get_rect()
+        self.rect.center = loc
+        self.rect.centery -= self.PH / 2
+        self.rect.centerx -= self.PW / 2
+        self.mask = pygame.mask.from_surface(self.image)
+        self.m = 0
+
+    def pointer(self, loc):
+        self.m = (loc[1] - self.rect.centery)/(loc[0] - self.rect.centerx)
+
+    def update(self):
+        self.rect.centery -= 2

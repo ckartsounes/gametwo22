@@ -8,6 +8,7 @@ platformim = pygame.image.load(resourcesS + "platformimg.png")
 jumpim = pygame.image.load(resourcesS + "jumpimg.png")
 leftim = pygame.image.load(resourcesS + "leftimg.png")
 rightim = pygame.image.load(resourcesS + "rightimg.png")
+bulletim = pygame.image.load(resourcesS + "bulletimg.png")
 # holeim = pygame.image.load(resourcesS + "")
 background_image_filename = resourcesS + 'backgroundimg.png'
 sprite_image_filename = resourcesS + 'playerimg.png'
