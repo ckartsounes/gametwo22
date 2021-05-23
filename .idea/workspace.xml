@@ -25,14 +25,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added sounds">
-      <change afterPath="$PROJECT_DIR$/resources/hitsound.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gametwo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gametwo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added all sounds and fixed end screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayerSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerSprite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jumpgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/jumpgame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/bubbles.mp3" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621538045755</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added all sounds and fixed end screen">
+      <created>1621741328977</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621741328977</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +197,7 @@
     <MESSAGE value="added first bits of the program" />
     <MESSAGE value="added platforms and background" />
     <MESSAGE value="fixed background" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed background" />
+    <MESSAGE value="added all sounds and fixed end screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="added all sounds and fixed end screen" />
   </component>
 </project>
