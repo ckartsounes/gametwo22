@@ -1,15 +1,15 @@
 from Resources import *
 
 
-class TearSprite(pygame.sprite.Sprite):
+class EraserSprite(pygame.sprite.Sprite):
     PW = None
     PH = None
 
     def __init__(self, loc):
         super().__init__()
-        self.PW = holeim.get_width()
-        self.PH = holeim.get_height()
-        self.image = holeim
+        self.PW = eraserim.get_width()
+        self.PH = eraserim.get_height()
+        self.image = eraserim
         self.rect = self.image.get_rect()
         self.rect.center = loc
         self.rect.centery -= self.PH/2

@@ -38,6 +38,7 @@ class BossSprite(pygame.sprite.Sprite):
             self.bulletList.append(BossBullet(self.rect.topright))
             self.timer = 0
         self.timer += 1
+
     def spawnBoss(self):
         self.spawn = True
 

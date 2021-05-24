@@ -9,11 +9,10 @@ from Resources import *
 from GlobalVariables import *
 from BossSprite import *
 from TearSprite import *
+from EraserSprite import *
 
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
-paddle_group = pygame.sprite.Group()
-paddle_group.add()
 
 font = pygame.font.Font(resourcesS + 'Baby Party.ttf', 32)
 
@@ -31,14 +30,16 @@ while showSplash:
 def show_gm_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
-    screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 100, SCREENH / 2 - 80))
-    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 145, SCREENH / 2 + 80))
+    screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 95, SCREENH / 2 - 80))
+    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+
 
 def show_win_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
-    screen.blit(font.render(("GAME WIN!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 100, SCREENH / 2 - 80))
-    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 145, SCREENH / 2 + 80))
+    screen.blit(font.render(("YOU WIN!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2 - 80))
+    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+
 
 screen.blit(background, (0, 0))
 
@@ -77,6 +78,8 @@ while loop:
     boss_group.add(boss1)
 
     spawnTear = True
+
+    spawnEraser = True
 
     global SCORE
     SCORE = 0
@@ -150,6 +153,11 @@ while loop:
                     spawnTear = False
                 elif SCORE % 11 == 0:
                     spawnTear = True
+                if SCORE % 7 == 0:
+                    enemy_sprites.add(EraserSprite((randint(0, SCREENW), -eraserim.get_height() - 75)))
+                    spawnEraser = False
+                elif SCORE % 8 == 0:
+                    spawnEraser = True
 
         time_passed = clock.tick(120)
         time_passed_seconds = time_passed / 1000.0
@@ -171,16 +179,16 @@ while loop:
                 if bullets.rect.centery > SCREENH:
                     bullet_group.remove(bullets)
 
-
         for bullets in bullet_group:
             if pygame.sprite.collide_mask(bullets, boss1) and boss1.spawn:
+                enemysound.play()
                 boss1.hit(player.damage)
                 bullet_group.remove(bullets)
 
         enemy_bullet_group.update()
         enemy_bullet_group.draw(screen)
 
-        if SCORE >= 50 and not boss1.dead():
+        if SCORE >= 10 and not boss1.dead():
             boss1.spawnBoss()
             boss_group.update()
             boss_group.draw(screen)
@@ -224,7 +232,7 @@ while loop:
             pygame.display.update()
         while win:
             if playsound:
-                diesound.play()
+                winsound.play()
                 playsound = False
             show_win_screen()
             for event in pygame.event.get():
