@@ -153,7 +153,7 @@ while loop:
                     spawnTear = False
                 elif SCORE % 11 == 0:
                     spawnTear = True
-                if SCORE % 7 == 0:
+                if SCORE % 7 == 0 and spawnEraser:
                     enemy_sprites.add(EraserSprite((randint(0, SCREENW), -eraserim.get_height() - 75)))
                     spawnEraser = False
                 elif SCORE % 8 == 0:

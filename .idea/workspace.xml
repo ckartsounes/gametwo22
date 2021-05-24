@@ -25,20 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added sounds">
-      <change afterPath="$PROJECT_DIR$/EraserSprite.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/enemysound.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/eraserimg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/winsound.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gametwo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gametwo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BossSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/BossSprite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalVariables.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalVariables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TearSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/TearSprite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jumpgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/jumpgame.py" afterDir="false" />
-    </list>
+    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added sounds and enemy, fixed win screen" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621538045755</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added sounds and enemy, fixed win screen">
+      <created>1621817838832</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621817838832</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +194,7 @@
     <MESSAGE value="added first bits of the program" />
     <MESSAGE value="added platforms and background" />
     <MESSAGE value="fixed background" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed background" />
+    <MESSAGE value="added sounds and enemy, fixed win screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sounds and enemy, fixed win screen" />
   </component>
 </project>
