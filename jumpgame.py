@@ -112,9 +112,7 @@ while loop:
                     else:
                         screen = pygame.display.set_mode((640, 500), 0, 32)
             if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
                 bullet = BulletSprite(player.rect.center)
-                bullet.pointer(pos)
                 bullet_group.add(bullet)
                 shootsound.play()
 

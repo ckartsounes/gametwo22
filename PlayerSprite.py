@@ -87,8 +87,5 @@ class BulletSprite(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.m = 0
 
-    def pointer(self, loc):
-        self.m = (loc[1] - self.rect.centery)/(loc[0] - self.rect.centerx)
-
     def update(self):
         self.rect.centery -= 2
