@@ -188,7 +188,7 @@ while loop:
         enemy_bullet_group.update()
         enemy_bullet_group.draw(screen)
 
-        if SCORE >= 10 and not boss1.dead():
+        if SCORE >= 50 and not boss1.dead():
             boss1.spawnBoss()
             boss_group.update()
             boss_group.draw(screen)
