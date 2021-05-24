@@ -15,15 +15,16 @@ from LifeSprite import *
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
 
-font = pygame.font.Font(resourcesS + 'Baby Party.ttf', 32)
+font = pygame.font.Font(resourcesS + 'HeinWriting.ttf', 32)
 
 showSplash = True
 while showSplash:
+    keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
-        elif event.type == MOUSEBUTTONDOWN:
+        elif keys[pygame.K_SPACE]:
             showSplash = False
     pygame.display.update()
 
@@ -32,14 +33,14 @@ def show_gm_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
     screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 95, SCREENH / 2 - 80))
-    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
 
 
 def show_win_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
     screen.blit(font.render(("YOU WIN!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2 - 80))
-    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
 
 
 screen.blit(background, (0, 0))
@@ -127,7 +128,7 @@ while loop:
         bottom = False
         for plat in platform_group:
             if plat.rect.centery == SCREENH:
-                platform_group.add(PlatformSprite((randint(0, SCREENH), randint(layer, layer + 75)), platformim))
+                platform_group.add(PlatformSprite((randint(25, SCREENH-25), randint(layer, layer + 65)), platformim))
                 platform_group.remove(plat)
             if pygame.sprite.collide_mask(plat, player):
                 testcollision = True
@@ -233,6 +234,7 @@ while loop:
 
     while gameover:
         while lose:
+            keys = pygame.key.get_pressed()
             if playsound:
                 diesound.play()
                 playsound = False
@@ -241,12 +243,13 @@ while loop:
                 if event.type == QUIT:
                     pygame.quit()
                     exit()
-                elif event.type == MOUSEBUTTONDOWN:
+                elif keys[pygame.K_SPACE]:
                     gameover = False
                     gameloop = True
                     lose = False
             pygame.display.update()
         while win:
+            keys = pygame.key.get_pressed()
             if playsound:
                 winsound.play()
                 playsound = False
@@ -255,7 +258,7 @@ while loop:
                 if event.type == QUIT:
                     pygame.quit()
                     exit()
-                elif event.type == MOUSEBUTTONDOWN:
+                elif keys[pygame.K_SPACE]:
                     gameover = False
                     gameloop = True
                     win = False
