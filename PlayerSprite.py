@@ -28,6 +28,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.addpoint = False
         self.life = 5
         self.bottom = False
+        self.damage = 1
 
     def moveRight(self):
         if self.rect.centerx == SCREENW:

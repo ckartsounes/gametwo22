@@ -7,13 +7,15 @@ from AstroidSprite import *
 from PlatformSprite import *
 from Resources import *
 from GlobalVariables import *
+from BossSprite import *
+from TearSprite import *
 
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
 paddle_group = pygame.sprite.Group()
 paddle_group.add()
 
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font(resourcesS + 'Baby Party.ttf', 32)
 
 showSplash = True
 while showSplash:
@@ -32,6 +34,11 @@ def show_gm_screen():
     screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 100, SCREENH / 2 - 80))
     screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 145, SCREENH / 2 + 80))
 
+def show_win_screen():
+    screen.blit(background2, (0, 0))
+    screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
+    screen.blit(font.render(("GAME WIN!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 100, SCREENH / 2 - 80))
+    screen.blit(font.render(("Click to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 145, SCREENH / 2 + 80))
 
 screen.blit(background, (0, 0))
 
@@ -63,15 +70,29 @@ while loop:
     spawnAstroid = True
 
     bullet_group = pygame.sprite.Group()
+    enemy_bullet_group = pygame.sprite.Group()
+
+    boss1 = BossSprite()
+    boss_group = pygame.sprite.Group()
+    boss_group.add(boss1)
+
+    spawnTear = True
 
     global SCORE
     SCORE = 0
 
+    lose = False
+    win = False
     while gameloop:
         screen.blit(background, (0, 0))
         if player.life <= 0:
             gameloop = False
             gameover = True
+            lose = True
+        if boss1.dead():
+            gameloop = False
+            gameover = True
+            win = True
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.mixer.quit()
@@ -121,10 +142,16 @@ while loop:
                 if player.addpoint:
                     SCORE += 1
                 if SCORE % 5 == 0 and spawnAstroid:
-                    enemy_sprites.add(AstroidSprite((randint(0, SCREENW), -enemyim.get_height() - 75), enemyim))
+                    for x in range(int(SCORE / 5)):
+                        enemy_sprites.add(AstroidSprite((randint(0, SCREENW), -enemyim.get_height() - 75), enemyim))
                     spawnAstroid = False
                 elif SCORE % 6 == 0:
                     spawnAstroid = True
+                if SCORE % 10 == 0 and spawnTear:
+                    enemy_sprites.add(TearSprite((randint(0, SCREENW), -holeim.get_height() - 75)))
+                    spawnTear = False
+                elif SCORE % 11 == 0:
+                    spawnTear = True
 
         time_passed = clock.tick(120)
         time_passed_seconds = time_passed / 1000.0
@@ -146,11 +173,36 @@ while loop:
                 if bullets.rect.centery > SCREENH:
                     bullet_group.remove(bullets)
 
+
+        for bullets in bullet_group:
+            if pygame.sprite.collide_mask(bullets, boss1) and boss1.spawn:
+                boss1.hit(player.damage)
+                bullet_group.remove(bullets)
+
+        enemy_bullet_group.update()
+        enemy_bullet_group.draw(screen)
+
+        if SCORE >= 50 and not boss1.dead():
+            boss1.spawnBoss()
+            boss_group.update()
+            boss_group.draw(screen)
+
+        for enemybullets in boss1.getBullets():
+            if pygame.sprite.collide_mask(enemybullets, player):
+                player.life -= 1
+                boss1.removeBullet(enemybullets)
+                break
+            if enemybullets.rect.centery >= SCREENH:
+                boss1.removeBullet(enemybullets)
+                break
+
+        enemy_bullet_group = boss1.getBullets()
+        print(len(enemy_bullet_group))
         player.update()
         player_group.draw(screen)
         platform_group.update(player.jumped)
         platform_group.draw(screen)
-        enemy_sprites.update()
+        enemy_sprites.update(player.jumped)
         enemy_sprites.draw(screen)
         bullet_group.update()
         bullet_group.draw(screen)
@@ -158,15 +210,31 @@ while loop:
         playsound = True
 
     while gameover:
-        if playsound:
-            diesound.play()
-            playsound = False
-        show_gm_screen()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                exit()
-            elif event.type == MOUSEBUTTONDOWN:
-                gameover = False
-                gameloop = True
-        pygame.display.update()
+        while lose:
+            if playsound:
+                diesound.play()
+                playsound = False
+            show_gm_screen()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    exit()
+                elif event.type == MOUSEBUTTONDOWN:
+                    gameover = False
+                    gameloop = True
+                    lose = False
+            pygame.display.update()
+        while win:
+            if playsound:
+                diesound.play()
+                playsound = False
+            show_win_screen()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    exit()
+                elif event.type == MOUSEBUTTONDOWN:
+                    gameover = False
+                    gameloop = True
+                    win = False
+            pygame.display.update()
