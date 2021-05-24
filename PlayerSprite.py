@@ -21,7 +21,7 @@ class PlayerSprite(pygame.sprite.Sprite):
         self.movingLeft = True
         self.x = loc[0]
         self.y = loc[1]
-        self.jumpheight = 150
+        self.jumpheight = 160
         self.jumpnow = 0
         self.fell = False
         self.collide = False

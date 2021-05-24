@@ -10,6 +10,7 @@ from GlobalVariables import *
 from BossSprite import *
 from TearSprite import *
 from EraserSprite import *
+from LifeSprite import *
 
 screen.blit(splash, splashrect.topleft)
 clock = pygame.time.Clock()
@@ -51,6 +52,7 @@ gameover = False
 while loop:
     # initialization:
     enemy_sprites = pygame.sprite.Group()
+    life_sprites = pygame.sprite.Group()
     screen.blit(background, (0, 0))
 
     platform_group = pygame.sprite.Group()
@@ -80,6 +82,8 @@ while loop:
     spawnTear = True
 
     spawnEraser = True
+
+    spawnLife = True
 
     global SCORE
     SCORE = 0
@@ -158,6 +162,11 @@ while loop:
                     spawnEraser = False
                 elif SCORE % 8 == 0:
                     spawnEraser = True
+                if SCORE % 15 == 0 and spawnLife:
+                    life_sprites.add(LifeSprite((randint(0, SCREENW), -lifeim.get_height() - 75)))
+                    spawnLife = False
+                elif SCORE % 16 == 0:
+                    spawnLife = True
 
         time_passed = clock.tick(120)
         time_passed_seconds = time_passed / 1000.0
@@ -178,6 +187,12 @@ while loop:
                     bullet_group.remove(bullets)
                 if bullets.rect.centery > SCREENH:
                     bullet_group.remove(bullets)
+
+        for life in life_sprites:
+            if pygame.sprite.collide_mask(life, player):
+                lifesound.play()
+                life_sprites.remove(life)
+                player.life += 1
 
         for bullets in bullet_group:
             if pygame.sprite.collide_mask(bullets, boss1) and boss1.spawn:
@@ -203,13 +218,14 @@ while loop:
                 break
 
         enemy_bullet_group = boss1.getBullets()
-        print(len(enemy_bullet_group))
         player.update()
         player_group.draw(screen)
         platform_group.update(player.jumped)
         platform_group.draw(screen)
         enemy_sprites.update(player.jumped)
         enemy_sprites.draw(screen)
+        life_sprites.update(player.jumped)
+        life_sprites.draw(screen)
         bullet_group.update()
         bullet_group.draw(screen)
         pygame.display.update()

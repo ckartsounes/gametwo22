@@ -25,7 +25,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="added sounds and enemy, fixed win screen" />
+    <list default="true" id="bd993c56-ac32-4154-9190-3f42cf62c7fb" name="Default Changelist" comment="ope forget to set boss level back to 50">
+      <change afterPath="$PROJECT_DIR$/LifeSprite.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lifeimg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lifesound.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayerSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerSprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jumpgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/jumpgame.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +167,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621817838832</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed a bug with the eraser">
+      <created>1621818084937</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621818084937</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ope forget to set boss level back to 50">
+      <created>1621818157927</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621818157927</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +217,8 @@
     <MESSAGE value="added platforms and background" />
     <MESSAGE value="fixed background" />
     <MESSAGE value="added sounds and enemy, fixed win screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sounds and enemy, fixed win screen" />
+    <MESSAGE value="fixed a bug with the eraser" />
+    <MESSAGE value="ope forget to set boss level back to 50" />
+    <option name="LAST_COMMIT_MESSAGE" value="ope forget to set boss level back to 50" />
   </component>
 </project>
