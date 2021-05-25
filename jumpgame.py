@@ -33,14 +33,16 @@ def show_gm_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
     screen.blit(font.render(("GAME OVER!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 95, SCREENH / 2 - 80))
-    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)),
+                (SCREENW / 2 - 165, SCREENH / 2 + 80))
 
 
 def show_win_screen():
     screen.blit(background2, (0, 0))
     screen.blit(font.render(("Score: " + str(SCORE)), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2))
     screen.blit(font.render(("YOU WIN!" + str()), False, (0, 0, 0)), (SCREENW / 2 - 60, SCREENH / 2 - 80))
-    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)), (SCREENW / 2 - 165, SCREENH / 2 + 80))
+    screen.blit(font.render(("Press Space to play again" + str()), False, (0, 0, 0)),
+                (SCREENW / 2 - 165, SCREENH / 2 + 80))
 
 
 screen.blit(background, (0, 0))
@@ -119,16 +121,24 @@ while loop:
                         screen = pygame.display.set_mode((640, 500), FULLSCREEN, 32)
                     else:
                         screen = pygame.display.set_mode((640, 500), 0, 32)
-            if event.type == pygame.MOUSEBUTTONUP:
-                bullet = BulletSprite(player.rect.center)
-                bullet_group.add(bullet)
-                shootsound.play()
+                if event.key == pygame.K_SPACE:
+                    bullet = BulletSprite(player.rect.center, False, False)
+                    bullet_group.add(bullet)
+                    shootsound.play()
+                if event.key == pygame.K_e:
+                    bullet = BulletSprite(player.rect.center, False, True)
+                    bullet_group.add(bullet)
+                    shootsound.play()
+                if event.key == pygame.K_q:
+                    bullet = BulletSprite(player.rect.center, True, False)
+                    bullet_group.add(bullet)
+                    shootsound.play()
 
         testcollision = False
         bottom = False
         for plat in platform_group:
             if plat.rect.centery == SCREENH:
-                platform_group.add(PlatformSprite((randint(25, SCREENH-25), randint(layer, layer + 65)), platformim))
+                platform_group.add(PlatformSprite((randint(25, SCREENH - 25), randint(layer, layer + 65)), platformim))
                 platform_group.remove(plat)
             if pygame.sprite.collide_mask(plat, player):
                 testcollision = True
@@ -138,11 +148,11 @@ while loop:
         player.colliding(testcollision, bottom)
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_a]:
             player.moveLeft()
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_d]:
             player.moveRight()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_w]:
             if bottom:
                 player.jump()
                 if player.addpoint:
